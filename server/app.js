@@ -70,8 +70,6 @@ app.post('/video/create', async (req, res) => {
       audioTimes.push(currTime);
     }
 
-    console.log(audioTimes);
-
     // CREATE THE MASTER AUDIO
     await createMasterAudio(transcriptData, sessionId);
     let masterAudioPath = `./tmp/${sessionId}-master.mp3`;

@@ -5,24 +5,6 @@ function getFilePath(sessionId, n, url) {
   return `../../tmp/images/${sessionId}-${n}.${fileFormat}`;
 }
 
-// function downloadImage(validURLs) {
-//   console.log(filepath);
-//   console.log(url);
-//   const imageDownloader = require('image-downloader');
-//   return imageDownloader.image({
-//     url,
-//     dest: filepath
-//   })
-//   .then(({ filename }) => {
-//     console.log('Saved to', filename)  // saved to /path/to/dest/photo.jpg
-//   })
-//   .catch((err) => {
-//     console.log('here?');
-//     console.error(err);
-    
-//   });
-// }
-
 module.exports = {
   determineSoundFile(sentimentScore) {
     const soundClips = {
@@ -156,7 +138,6 @@ module.exports = {
           filepath = validURL['filepath'];
 
           try {
-            console.log('trying ' + filepath + '(' + url + ')')
             await imageDownloader.image({
               url,
               dest: filepath
@@ -172,7 +153,6 @@ module.exports = {
         resolve(`./tmp/images/${sessionId}-${n}${path.extname(filepath)}`);
 
       } catch(err) {
-        console.log('NOT HERE PLEASE');
         console.error(err);
         reject(new Error(err));        
       }
@@ -188,9 +168,7 @@ module.exports = {
         audioFiles.push(data.soundFile);
       }
     }
-
-    console.log(audioFiles);
-
+    
     return new Promise((resolve, reject) => {
       audioconcat(audioFiles)
         .concat(`./tmp/${sessionId}-master.mp3`)
